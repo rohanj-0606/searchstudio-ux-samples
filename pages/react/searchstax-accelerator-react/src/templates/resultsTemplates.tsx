@@ -1,4 +1,7 @@
-import { ISearchstaxParsedResult, ISearchstaxSearchMetadata } from "@searchstax-inc/searchstudio-ux-js";
+import {
+  ISearchstaxParsedResult,
+  ISearchstaxSearchMetadata,
+} from "@searchstax-inc/searchstudio-ux-js";
 
 export function noResultTemplate(
   searchTerm: string,
@@ -6,31 +9,30 @@ export function noResultTemplate(
   executeSearch: (searchTerm: string) => void
 ): React.ReactElement {
   return (
-    <div>
-      <div className="searchstax-no-results">
-        {" "}
-        Showing <strong>no results</strong> for <strong>"{searchTerm}"</strong>
-        <br />
+    <div className="no-results-container">
+      <p className="no-results-message">
+        No results found for <strong>"{searchTerm}"</strong>.
         {metaData?.spellingSuggestion && (
-          <span>
-            &nbsp;Did you mean{" "}
-            <a href="#" className="searchstax-suggestion-term" onClick={(e) => {
-                          e.preventDefault();
-                          executeSearch(metaData?.spellingSuggestion);
-                        }}>
-              {metaData?.spellingSuggestion}
+          <>
+            {" "}
+            Try searching for{" "}
+            <a
+              href="#"
+              className="suggestion-link"
+              onClick={(e) => {
+                e.preventDefault();
+                executeSearch(metaData.spellingSuggestion);
+              }}
+            >
+              {metaData.spellingSuggestion}
             </a>
             ?
-          </span>
+          </>
         )}
-      </div>
-      <ul>
-        <li>
-          {" "}
-          Try searching for search related terms or topics. We offer a wide
-          variety of content to help you get the information you need.{" "}
-        </li>
-        <li>Lost? Click on the ‘X” in the Search Box to reset your search.</li>
+      </p>
+      <ul className="no-results-tips">
+        <li>Explore related terms or topics to refine your search.</li>
+        <li>Click the ‘X’ in the search box to start a new search.</li>
       </ul>
     </div>
   );
@@ -39,101 +41,48 @@ export function noResultTemplate(
 export function resultsTemplate(
   searchResults: ISearchstaxParsedResult[],
   resultClicked: (
-    results: ISearchstaxParsedResult,
-    event: any
-  ) => ISearchstaxParsedResult[]
+    result: ISearchstaxParsedResult,
+    event: React.MouseEvent | React.KeyboardEvent
+  ) => void
 ): React.ReactElement {
   return (
-    <>
-      {searchResults && searchResults.length && (
-
-      <div className="searchstax-search-results" aria-live="polite">
-       {searchResults !== null &&
-                    searchResults.map(function (searchResult) {
-                      return (
-                        <a href={searchResult.url ?? ''} onClick={event => {
-                          resultClicked(searchResult, event);
-                        }}
-                        onKeyDown={(e) => {
-                          if(e.key === 'Enter' || e.key === ' ') {
-                            resultClicked(searchResult, e);
-                          }
-                        }}
-                        data-searchstax-unique-result-id={ searchResult.uniqueId} key={searchResult.uniqueId} className="searchstax-result-item-link searchstax-result-item-link-wrapping" tabIndex={0}>
-                        <div
-                          className={`searchstax-search-result ${
-                            searchResult.thumbnail ? "has-thumbnail" : ""
-                          }`}
-                          key={searchResult.uniqueId}
-                        >
-                          {searchResult.promoted && (
-                            <div className="searchstax-search-result-promoted"></div>
-                          )}
-
-
-                          {searchResult.ribbon && (
-                            <div className="searchstax-search-result-ribbon">
-                              {searchResult.ribbon}
-                            </div>
-                          )}
-
-                          {searchResult.thumbnail && (
-                            <img
-                              src={searchResult.thumbnail}
-                              className="searchstax-thumbnail"
-                            />
-                          )}
-
-                          <div className="searchstax-search-result-title-container">
-                            <span className="searchstax-search-result-title">
-                              {searchResult.title}
-                            </span>
-                          </div>
-
-                          {searchResult.paths && (
-                            <p className="searchstax-search-result-common">
-                              {searchResult.paths}
-                            </p>
-                          )}
-
-                          {searchResult.description && (
-                            <p className="searchstax-search-result-description searchstax-search-result-common">
-                              {searchResult.description}
-                            </p>
-                          )}
-
-                          {searchResult.unmappedFields.map(function (
-                            unmappedField: any
-                          ) {
-                            return (
-                              <div key={unmappedField.key}>
-                                {unmappedField.isImage &&
-                                  typeof unmappedField.value === "string" && (
-                                    <div className="searchstax-search-result-image-container">
-                                      <img
-                                        src={unmappedField.value}
-                                        className="searchstax-result-image"
-                                      />
-                                    </div>
-                                  )}
-
-                                {!unmappedField.isImage && (
-                                  <div>
-                                    <p className="searchstax-search-result-common">
-                                      {unmappedField.value}
-                                    </p>
-                                  </div>
-                                )}
-                              </div>
-                            );
-                          })}
-                        </div>
-                        </a>
-                      );
-                    })}
-    </div>
-
+    <div className="search-results-container">
+      {searchResults.length > 0 ? (
+        searchResults.map((result) => (
+          <div
+            key={result.uniqueId}
+            className="search-result-item"
+            tabIndex={0}
+          >
+            {result.ribbon && (
+              <div className="searchstax-search-result-ribbon">
+                {result.ribbon}
+              </div>
+            )}{" "}
+            <a
+              href={result.url ? result.url : "#"}
+              className="search-result-link"
+              target="_blank" // Ensure it opens in a new tab
+              rel="noopener noreferrer" // Security measure
+              // onClick={(event) => {
+              //   console.log("clicked");
+              //   // Call resultClicked to handle additional logic if needed
+              //   resultClicked(result, event);
+              // }}
+              // onKeyDown={(event) => {
+              //   if (event.key === "Enter" || event.key === " ") {
+              //     resultClicked(result, event);
+              //   }
+              // }}
+            >
+              <div className="search-result-title">{result.title}</div>
+              <div className="search-result-snippet">{result.description}</div>
+            </a>
+          </div>
+        ))
+      ) : (
+        <div className="no-results-message">No results found.</div>
       )}
-    </>
+    </div>
   );
 }

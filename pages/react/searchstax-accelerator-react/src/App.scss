@@ -1,177 +1,320 @@
-@import url("https://fonts.googleapis.com/css2?family=Barlow:wght@100;300;600&display=swap");
-@import "./../node_modules/@searchstax-inc/searchstudio-ux-js/dist/styles/mainTheme.css";
-*,
-html {
-  font-family: "Barlow", sans-serif !important;
-}
 body {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-}
-
-h1 {
-  font-weight: 300;
-}
-
-.searchstax-page-layout-facet-result-container {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(
+    135deg,
+    #fff7e5,
+    #ffd699
+  ); /* Orange and white gradient */
+  color: #333;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
 
-.searchstax-search-input-container {
-  width: 50%;
-  height: auto !important;
-  margin: auto;
-  font-size: 22px;
-  font-weight: 300;
-  box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.35) !important;
-  border-radius: 6px !important;
+#searchAccessibilityContainer {
+  display: none;
 }
-.searchstax-search-result {
+
+.searchstax-page-layout-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+  padding: 20px;
+}
+
+/* Center the input box at the top of the page */
+.search-input-wrapper {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 600px;
+  z-index: 1000;
+  background: #ffffff; /* White background for the input wrapper */
   border-radius: 8px;
-  overflow: hidden;
-  padding: 0 !important;
-  height: 180px;
-
-  .searchstax-search-result-image-container {
-    width: 250px !important;
-    height: unset !important;
-    overflow: unset !important;
-  }
-
-  .searchstax-result-item-link {
-    margin-top: 0;
-  }
-
-  .searchstax-search-result-content {
-    flex: 2;
-    padding: 1rem;
-  }
-
-  .searchstax-search-result-ribbon {
-    all: unset !important;
-    font-size: 10px !important;
-  }
-
-  .searchstax-search-result-title-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-  }
-
-  .searchstax-search-result-title {
-    font-weight: 600;
-    font-size: 14px !important;
-    line-height: 1.2rem;
-    text-transform: uppercase;
-  }
-
-  .searchstax-search-result-description {
-    margin-top: 20px;
-  }
-
-  .searchstax-search-result:hover {
-    cursor: pointer;
-    box-shadow: 1px 1px 5px 3px rgba(0, 0, 0, 0.25);
-  }
-}
-
-.searchstax-autosuggest-container {
-  margin-top: 55px !important;
-  border-radius: 0px 0px 10px 10px;
-}
-
-.searchstax-result {
-  &-image {
-    display: block;
-    height: 100% !important;
-    object-fit: cover;
-  }
-}
-
-.searchstax-facet {
-  .searchstax-facet-title {
-    font-weight: 600;
-    margin-bottom: 10px;
-  }
-  .searchstax-facet-value {
-    .searchstax-facet-value-container {
-      margin-bottom: 5px;
-    }
-    .searchstax-facet-value-label {
-      text-transform: capitalize !important;
-    }
-    .searchstax-facet-value-count {
-      font-weight: 600 !important;
-    }
-  }
-}
-
-.searchstax-related-searches-container {
-  margin-top: 40px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 10px 20px;
   display: flex;
+  align-items: center;
+  gap: 10px; /* Add gap between input and button */
 }
 
-.searchstax-related-search {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 0px;
-  margin: 0px 0 20px 10px;
-
-  .searchstax-related-search-item {
-    display: block;
-    color: #111 !important;
-    font-weight: 500;
-    .searchstax-related-search:hover {
-      color: #EB3500 !important;
-    }
-  }
-}
-.searchstax-facets-pill-filter-by {
-  height: auto !important;
+/* Styles for the input box */
+.search-input {
+  flex: 1;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #f4a261; /* Orange border color */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.search-details-container {
-  margin-top: 40px !important;
-  justify-content: space-between;
+.search-input:focus {
+  border-color: #e76f51; /* Darker orange focus color */
+  box-shadow: 0 2px 4px rgba(231, 111, 81, 0.3);
 }
-.feedback-container {
+
+/* Styles for the search button */
+.search-button {
+  background-color: #e76f51; /* Dark orange background color */
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 16px;
+  padding: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-button:hover {
+  background-color: #d95d3f; /* Darker orange on hover */
+}
+
+.search-button .fa-search {
+  font-size: 18px;
+}
+
+/* Styles for the autosuggest container */
+.autosuggest-container {
+  position: absolute;
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #f4a261;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 1000;
+  top: 100%;
+  left: 0;
+  margin-top: 5px;
+}
+
+/* Hide autosuggest container when there are no suggestions */
+.autosuggest-container.hidden {
+  display: none;
+}
+
+/* Styles for autosuggest items */
+.autosuggest-item {
+  padding: 12px;
+  border-bottom: 1px solid #f4a261;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.autosuggest-item:hover {
+  background-color: #fcebd7; /* Light orange background on hover */
+}
+
+/* Styles for autosuggest item term */
+.autosuggest-item-term {
+  font-size: 14px;
+}
+
+/* Style for search results ribbon */
+
+.searchstax-search-result-ribbon {
+  padding: 5px 0px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* Styles for search results */
+.searchstax-search-results-container {
+  max-width: 100%;
+  margin-right: 40px;
+}
+
+.search-results-container {
+  margin-top: 80px; /* Ensure results are below the search input */
+  width: 100%;
+  max-width: 600px;
+  background: #ffffff;
+  border: 1px solid #f4a261;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  z-index: 1000;
+}
+
+/* Styles for individual search result items */
+.search-result-item {
+  display: block;
+  padding: 15px;
+  border-bottom: 1px solid #f4a261;
+  text-decoration: none;
+  color: #333;
+  transition: background-color 0.2s ease;
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+}
+
+.search-result-item:hover {
+  background-color: #fcebd7; /* Light orange background on hover */
+}
+
+.search-result-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #e76f51; /* Orange color for titles */
+  margin-bottom: 5px;
+}
+
+.search-result-snippet {
+  font-size: 14px;
+  color: #333;
+}
+
+/* Styles for no results message */
+.no-results-container {
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #f4a261;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.no-results-message {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.suggestion-link {
+  color: #e76f51;
+  font-weight: bold;
+  text-decoration: none;
+  border-bottom: 1px dotted #e76f51;
+  transition: color 0.2s ease, border-bottom 0.2s ease;
+}
+
+.suggestion-link:hover {
+  color: #d95d3f;
+  border-bottom: 1px solid #d95d3f;
+}
+
+.no-results-tips {
+  font-size: 14px;
+  color: #666;
+  list-style-type: disc;
+  padding-left: 20px;
+  margin: 0;
+}
+
+.no-results-tips li {
+  margin-bottom: 10px;
+}
+
+/* Pagination Styles */
+.searchstax-pagination-empty {
+  display: none;
+}
+
+.searchstax-main-pagination-container {
+  display: contents;
+}
+
+.searchstax-pagination-container {
+  margin-top: 20px;
+  width: 100%;
+  max-width: 600px;
+  background: #ffffff;
+  border: 1px solid #f4a261;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 15px;
+}
+
+/* Adjust pagination content for smaller screens */
+.searchstax-pagination-content {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20px;
+  align-items: center;
 }
 
-.pill {
-  background: #ddd;
-  padding: 0.3rem;
-  text-transform: uppercase;
-  font-size: 10px;
-  font-weight: 600;
-  margin-right: 10px;
-  white-space: nowrap;
+/* Pagination buttons */
+.searchstax-pagination-previous,
+.searchstax-pagination-next {
+  color: #e76f51; /* Dark orange */
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 15px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  cursor: pointer;
 }
 
-@media (min-width: 37.5em) {
-  .container {
-    width: calc(37.5em + ((100% - 37.5em) * 0.7));
+.searchstax-pagination-previous:hover,
+.searchstax-pagination-next:hover {
+  background-color: #fcebd7; /* Light orange */
+}
+
+.searchstax-pagination-previous:disabled,
+.searchstax-pagination-next:disabled {
+  color: #ccc;
+  pointer-events: none;
+  cursor: default;
+}
+
+.searchstax-pagination-details {
+  font-size: 16px;
+  color: #333;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .search-input-wrapper {
+    width: 90%; /* Adjust the width for mobile */
+    padding: 10px; /* Reduce padding on mobile */
+    top: 10px; /* Reduce top space for mobile */
   }
-}
 
-@media screen and (max-width: 767px) {
-  .searchstax-search-input-container {
-    width: 100%;
+  .search-input {
+    padding: 10px; /* Slightly reduce padding */
+    font-size: 14px; /* Slightly reduce font size */
   }
-}
-.searchstax-facet-value-count {
-  font-weight: 600 !important;
-}
 
-.searchstax-facet-show {
-  &-more-button,
-  &-less-button {
-    font-weight: 600;
+  .search-button {
+    padding: 10px; /* Adjust button padding for mobile */
+    font-size: 14px; /* Reduce font size */
+  }
+
+  .search-results-container {
+    padding: 10px; /* Reduce padding for mobile */
+  }
+
+  .search-result-title {
+    font-size: 14px; /* Adjust title font size for mobile */
+  }
+
+  .search-result-snippet {
+    font-size: 12px; /* Adjust snippet font size for mobile */
+  }
+
+  .searchstax-pagination-container {
+    padding: 10px; /* Reduce padding for mobile */
+  }
+
+  .searchstax-pagination-previous,
+  .searchstax-pagination-next {
+    font-size: 14px; /* Reduce font size for mobile */
+    padding: 8px 12px; /* Adjust padding */
   }
 }
