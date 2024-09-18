@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  padding: 0;
   font-family: Arial, sans-serif;
   background: linear-gradient(
     135deg,
@@ -7,7 +8,8 @@ body {
     #ffd699
   ); /* Orange and white gradient */
   color: #333;
-  display: flex;
+  display: grid;
+  place-items: center;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
@@ -18,11 +20,11 @@ body {
 }
 
 .searchstax-page-layout-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  justify-items: center;
   width: 100%;
-  max-width: 800px;
+  max-width: 1200px;
   padding: 20px;
 }
 
@@ -30,6 +32,7 @@ body {
 .search-input-wrapper {
   position: fixed;
   top: 20px;
+  margin-bottom: 0px;
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
@@ -39,8 +42,8 @@ body {
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   padding: 10px 20px;
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr auto;
   gap: 10px; /* Add gap between input and button */
 }
 
@@ -139,7 +142,6 @@ body {
 .search-results-container {
   margin-top: 80px; /* Ensure results are below the search input */
   width: 100%;
-  max-width: 600px;
   background: #ffffff;
   border: 1px solid #f4a261;
   border-radius: 8px;
@@ -385,9 +387,7 @@ body {
 }
 
 .searchstax-pagination-container {
-  margin-top: 20px;
-  width: 100%;
-  max-width: 600px;
+  max-width: 100%;
   background: #ffffff;
   border: 1px solid #f4a261;
   border-radius: 8px;
@@ -441,30 +441,40 @@ body {
 
 /* Second row: Sorting component */
 .sorting-row {
+  display: grid;
+  grid-template-columns: 1fr auto; /* Main content and a sorting dropdown */
+  align-items: center; /* Vertically center the content */
+  gap: 20px; /* Adjust the gap between the elements */
   width: 100%;
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: flex-end; /* Align sorting widget to the right */
 }
 
 /* Third row: Filters and results layout */
 .search-layout-row {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 3fr; /* Filter and results next to each other */
+  gap: 20px; /* Space between filter and results */
   width: 100%;
-  justify-content: space-between;
+  align-items: flex-start; /* Align at the top */
 }
 
-/* Left column for the filters */
 .filter-column {
-  flex: 0 0 25%; /* Occupies 25% of the width */
-  padding-right: 20px; /* Space between filter and results */
+  //grid-column: span 1; /* Filter column occupies 1/4 */
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: fit-content;
 }
 
-/* Right column for the search results */
 .result-column {
-  flex: 1; /* Occupies the remaining 75% of the width */
-  display: flex;
-  flex-direction: column;
+  // grid-column: span 3; /* Result column occupies 3/4 */
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: grid;
+  gap: 20px;
+  height: auto;
 }
 
 /* Adjustments for pagination and results */
@@ -473,15 +483,13 @@ body {
 }
 
 .searchstax-sorting-container {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  margin-bottom: 20px;
-  padding: 10px;
-  background-color: #fff;
-  border: 1px solid #f4a261;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: grid;
+  grid-template-columns: auto auto; /* Sorting label and dropdown side by side */
+  align-items: center; /* Vertically center the content */
+  gap: 10px; /* Space between label and dropdown */
+  justify-content: end; /* Align sorting elements to the right */
+  padding: 10px 0;
+  width: 100%;
 }
 
 .searchstax-sorting-label {
@@ -509,18 +517,18 @@ body {
 /* Mobile responsiveness */
 @media (max-width: 768px) {
   .search-layout-row {
-    flex-direction: column;
+    grid-template-columns: 1fr; /* Stacks on small screens */
   }
 
   .filter-column {
-    flex: 0 0 100%;
-    padding-right: 0;
+    grid-column: span 1;
     margin-bottom: 20px;
   }
 
   .result-column {
-    flex: 0 0 100%;
+    grid-column: span 1;
   }
+
   .search-input-wrapper {
     width: 90%; /* Adjust the width for mobile */
     padding: 10px; /* Reduce padding on mobile */
@@ -539,24 +547,6 @@ body {
 
   .search-results-container {
     padding: 10px; /* Reduce padding for mobile */
-  }
-
-  .search-result-title {
-    font-size: 14px; /* Adjust title font size for mobile */
-  }
-
-  .search-result-snippet {
-    font-size: 12px; /* Adjust snippet font size for mobile */
-  }
-
-  .searchstax-pagination-container {
-    padding: 10px; /* Reduce padding for mobile */
-  }
-
-  .searchstax-pagination-previous,
-  .searchstax-pagination-next {
-    font-size: 14px; /* Reduce font size for mobile */
-    padding: 8px 12px; /* Adjust padding */
   }
 }
 /* Responsiveness for desktop filter overflow */
