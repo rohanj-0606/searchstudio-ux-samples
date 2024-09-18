@@ -140,7 +140,6 @@ body {
 }
 
 .search-results-container {
-  margin-top: 80px; /* Ensure results are below the search input */
   width: 100%;
   background: #ffffff;
   border: 1px solid #f4a261;
@@ -234,7 +233,6 @@ body {
   background-color: #fff7e5; /* Matching background gradient color */
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-top: 90px;
 }
 
 .searchstax-facet-container {
@@ -459,7 +457,7 @@ body {
 
 .filter-column {
   //grid-column: span 1; /* Filter column occupies 1/4 */
-  background-color: #f4f4f4;
+  background-color: white;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
