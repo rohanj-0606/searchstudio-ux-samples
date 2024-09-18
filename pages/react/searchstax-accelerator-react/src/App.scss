@@ -221,6 +221,159 @@ body {
   margin-bottom: 10px;
 }
 
+.searchstax-facets-container-desktop {
+  display: flex;
+  flex-wrap: nowrap; /* Ensure filters are in one line */
+  overflow-x: auto; /* Allow horizontal scrolling if needed */
+  justify-content: flex-start;
+  padding: 10px;
+  background-color: #fff7e5; /* Matching background gradient color */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 90px;
+}
+
+.searchstax-facet-container {
+  margin-right: 15px; /* Spacing between facet filters */
+  flex-shrink: 0;
+
+  &.active {
+    font-weight: bold;
+    color: #e76f51; /* Darker orange for active facet */
+  }
+}
+
+.searchstax-facet-title-container {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  border-bottom: 1px solid #f4a261; /* Orange underline */
+  padding-bottom: 5px;
+}
+
+.searchstax-facet-title {
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.searchstax-facet-title-arrow {
+  transition: transform 0.3s;
+  &.active {
+    transform: rotate(180deg);
+  }
+}
+
+.searchstax-facet-values-container {
+  display: flex;
+  flex-direction: column;
+  aria-live: polite;
+  margin-top: 5px;
+}
+
+.searchstax-facet-value-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+
+  &.searchstax-facet-value-disabled {
+    opacity: 0.5;
+  }
+}
+
+.searchstax-facet-input {
+  margin-right: 10px;
+}
+
+.searchstax-facet-input-checkbox {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.searchstax-facet-value-label {
+  text-transform: capitalize !important;
+  cursor: pointer;
+}
+
+.searchstax-facet-value-count {
+  font-weight: 600 !important;
+  cursor: pointer;
+}
+
+.searchstax-facet-show-more-container {
+  cursor: pointer;
+  color: #e76f51; /* Dark orange */
+}
+
+.searchstax-facet-show-more-button,
+.searchstax-facet-show-less-button {
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Mobile specific styles */
+.searchstax-facets-container-mobile {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  z-index: 1000;
+  display: none;
+}
+
+.searchstax-facets-mobile-overlay {
+  &.searchstax-show {
+    display: block;
+  }
+}
+
+.searchstax-facets-pill {
+  display: flex;
+  padding: 0.5rem;
+  margin-right: 10px;
+  background: #ddd;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+
+  &-filter-by {
+    height: auto !important;
+  }
+
+  &-clear-all {
+    background-color: #e76f51;
+    color: #fff;
+    padding: 0.3rem 0.5rem;
+  }
+}
+
+.searchstax-search-close {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+}
+
+.searchstax-facets-mobile-overlay-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.searchstax-facets-mobile-overlay-done {
+  display: block;
+  margin: 1rem auto;
+  padding: 0.5rem 1rem;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
 /* Pagination Styles */
 .searchstax-pagination-empty {
   display: none;
@@ -316,5 +469,12 @@ body {
   .searchstax-pagination-next {
     font-size: 14px; /* Reduce font size for mobile */
     padding: 8px 12px; /* Adjust padding */
+  }
+}
+/* Responsiveness for desktop filter overflow */
+@media screen and (max-width: 1200px) {
+  .searchstax-facets-container-desktop {
+    flex-wrap: nowrap;
+    overflow-x: auto;
   }
 }

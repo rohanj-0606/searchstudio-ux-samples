@@ -221,14 +221,14 @@ function App() {
           afterAutosuggest={afterAutosuggest}
           beforeAutosuggest={beforeAutosuggest}
         ></SearchstaxInputWidget>
-        {/* <SearchstaxFacetsWidget
+        <SearchstaxFacetsWidget
           facetingType="and"
-          itemsPerPageDesktop={2}
+          itemsPerPageDesktop={4}
           itemsPerPageMobile={3}
           specificFacets={undefined}
           facetsTemplateDesktop={facetsTemplateDesktop}
           facetsTemplateMobile={facetsTemplateMobile}
-        /> */}
+        />
         <SearchstaxResultWidget
           afterLinkClick={afterLinkClick}
           resultsPerPage={10}
