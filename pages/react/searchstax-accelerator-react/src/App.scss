@@ -140,7 +140,6 @@ body {
 }
 
 .search-results-container {
-  width: 100%;
   background: #ffffff;
   border: 1px solid #f4a261;
   border-radius: 8px;
@@ -512,7 +511,7 @@ body {
   box-shadow: 0 2px 4px rgba(231, 111, 81, 0.3);
 }
 
-.hide {
+.hidden {
   display: none;
 }
 

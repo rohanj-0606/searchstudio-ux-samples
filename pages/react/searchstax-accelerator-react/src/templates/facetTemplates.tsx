@@ -25,76 +25,85 @@ export function facetsTemplateDesktop(
   ) => void
 ) {
   return facetsTemplateData ? (
-    <div className="searchstax-facets-container-desktop">
-      {facetsTemplateData?.facets.map((facet) => (
-        <div
-          className={`searchstax-facet-container ${
-            isNotDeactivated(facet.name) ? "active" : ""
-          }`}
-          key={facet.name + "desktop"}
-        >
+    <div className="filter-column">
+      <div className="searchstax-facets-container-desktop">
+        {facetsTemplateData?.facets.map((facet) => (
           <div
-            className="searchstax-facet-title-container"
-            onClick={() => toggleFacetGroup(facet.name)}
+            className={`searchstax-facet-container ${
+              isNotDeactivated(facet.name) ? "active" : ""
+            }`}
+            key={facet.name + "desktop"}
           >
-            <div className="searchstax-facet-title">{facet.label}</div>
-            <div className="searchstax-facet-title-arrow active"></div>
-          </div>
-          <div className="searchstax-facet-values-container" aria-live="polite">
-            {facet.values.map((facetValue, key) => {
-              const refKey = key + facet.name;
-              facetContainers[refKey] = createRef();
-              return (
+            <div
+              className="searchstax-facet-title-container"
+              onClick={() => toggleFacetGroup(facet.name)}
+            >
+              <div className="searchstax-facet-title">{facet.label}</div>
+              <div className="searchstax-facet-title-arrow active"></div>
+            </div>
+            <div
+              className="searchstax-facet-values-container"
+              aria-live="polite"
+            >
+              {facet.values.map((facetValue, key) => {
+                const refKey = key + facet.name;
+                facetContainers[refKey] = createRef();
+                return (
+                  <div
+                    key={facetValue.value + facetValue.parentName}
+                    className={`searchstax-facet-value-container ${
+                      facetValue.disabled
+                        ? "searchstax-facet-value-disabled"
+                        : ""
+                    }`}
+                    ref={facetContainers[refKey]}
+                  >
+                    <div className={`searchstax-facet-input desktop-${refKey}`}>
+                      <input
+                        type="checkbox"
+                        className="searchstax-facet-input-checkbox"
+                        checked={isChecked(facetValue)}
+                        readOnly
+                        aria-label={`${facetValue.value} ${facetValue.count}`}
+                        disabled={facetValue.disabled}
+                        onClick={(e) =>
+                          selectFacet(refKey, e, facetValue, true)
+                        }
+                      />
+                    </div>
+                    <div
+                      className="searchstax-facet-value-label"
+                      onClick={(e) => selectFacet(refKey, e, facetValue, false)}
+                    >
+                      {facetValue.value}
+                    </div>
+                    <div
+                      className="searchstax-facet-value-count"
+                      onClick={(e) => selectFacet(refKey, e, facetValue, false)}
+                    >
+                      ({facetValue.count})
+                    </div>
+                  </div>
+                );
+              })}
+              {facet.hasMoreFacets && (
                 <div
-                  key={facetValue.value + facetValue.parentName}
-                  className={`searchstax-facet-value-container ${
-                    facetValue.disabled ? "searchstax-facet-value-disabled" : ""
-                  }`}
-                  ref={facetContainers[refKey]}
+                  className="searchstax-facet-show-more-container"
+                  onClick={(e) => showMoreLess(e, facet)}
                 >
-                  <div className={`searchstax-facet-input desktop-${refKey}`}>
-                    <input
-                      type="checkbox"
-                      className="searchstax-facet-input-checkbox"
-                      checked={isChecked(facetValue)}
-                      readOnly
-                      aria-label={`${facetValue.value} ${facetValue.count}`}
-                      disabled={facetValue.disabled}
-                      onClick={(e) => selectFacet(refKey, e, facetValue, true)}
-                    />
-                  </div>
                   <div
-                    className="searchstax-facet-value-label"
-                    onClick={(e) => selectFacet(refKey, e, facetValue, false)}
+                    className={`searchstax-facet-show-${
+                      facet.showingAllFacets ? "less" : "more"
+                    }-button searchstax-facet-show-button`}
                   >
-                    {facetValue.value}
-                  </div>
-                  <div
-                    className="searchstax-facet-value-count"
-                    onClick={(e) => selectFacet(refKey, e, facetValue, false)}
-                  >
-                    ({facetValue.count})
+                    {facet.showingAllFacets ? "less" : "more"}
                   </div>
                 </div>
-              );
-            })}
-            {facet.hasMoreFacets && (
-              <div
-                className="searchstax-facet-show-more-container"
-                onClick={(e) => showMoreLess(e, facet)}
-              >
-                <div
-                  className={`searchstax-facet-show-${
-                    facet.showingAllFacets ? "less" : "more"
-                  }-button searchstax-facet-show-button`}
-                >
-                  {facet.showingAllFacets ? "less" : "more"}
-                </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   ) : (
     <div />
@@ -126,8 +135,6 @@ export function facetsTemplateMobile(
   closeOverlay: () => void,
   unselectAll: () => void
 ) {
-  console.log(facetsTemplateData);
-
   return facetsTemplateData ? (
     <div className="searchstax-facets-container-mobile">
       <div className="searchstax-facets-pills-container">

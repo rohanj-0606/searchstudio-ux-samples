@@ -46,43 +46,47 @@ export function resultsTemplate(
   ) => void
 ): React.ReactElement {
   return (
-    <div className="search-results-container">
-      {searchResults.length > 0 ? (
-        searchResults.map((result) => (
-          <div
-            key={result.uniqueId}
-            className="search-result-item"
-            tabIndex={0}
-          >
-            {result.ribbon && (
-              <div className="searchstax-search-result-ribbon">
-                {result.ribbon}
-              </div>
-            )}{" "}
-            <a
-              href={result.url ? result.url : "#"}
-              className="search-result-link"
-              target="_blank" // Ensure it opens in a new tab
-              rel="noopener noreferrer" // Security measure
-              // onClick={(event) => {
-              //   console.log("clicked");
-              //   // Call resultClicked to handle additional logic if needed
-              //   resultClicked(result, event);
-              // }}
-              // onKeyDown={(event) => {
-              //   if (event.key === "Enter" || event.key === " ") {
-              //     resultClicked(result, event);
-              //   }
-              // }}
+    <div className="result-column">
+      <div className="search-results-container">
+        {searchResults.length > 0 ? (
+          searchResults.map((result) => (
+            <div
+              key={result.uniqueId}
+              className="search-result-item"
+              tabIndex={0}
             >
-              <div className="search-result-title">{result.title}</div>
-              <div className="search-result-snippet">{result.description}</div>
-            </a>
-          </div>
-        ))
-      ) : (
-        <div className="no-results-message">No results found.</div>
-      )}
+              {result.ribbon && (
+                <div className="searchstax-search-result-ribbon">
+                  {result.ribbon}
+                </div>
+              )}{" "}
+              <a
+                href={result.url ? result.url : "#"}
+                className="search-result-link"
+                target="_blank" // Ensure it opens in a new tab
+                rel="noopener noreferrer" // Security measure
+                // onClick={(event) => {
+                //   console.log("clicked");
+                //   // Call resultClicked to handle additional logic if needed
+                //   resultClicked(result, event);
+                // }}
+                // onKeyDown={(event) => {
+                //   if (event.key === "Enter" || event.key === " ") {
+                //     resultClicked(result, event);
+                //   }
+                // }}
+              >
+                <div className="search-result-title">{result.title}</div>
+                <div className="search-result-snippet">
+                  {result.description}
+                </div>
+              </a>
+            </div>
+          ))
+        ) : (
+          <div className="no-results-message">No results found.</div>
+        )}
+      </div>{" "}
     </div>
   );
 }

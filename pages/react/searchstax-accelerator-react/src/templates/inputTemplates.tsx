@@ -7,6 +7,7 @@ export function InputTemplate(
   onMouseOver: (suggestion: ISearchstaxSuggestion) => void,
   onMouseClick: () => void
 ): React.ReactElement {
+  //ts-ignore
   const [inputValue, setInputValue] = useState("");
   const [isFocused, setIsFocused] = useState(false);
 
@@ -20,11 +21,10 @@ export function InputTemplate(
     <div className="search-input-wrapper">
       <input
         type="text"
-        id="searchstax-search-input" // Ensure this ID matches what the library expects
+        id="searchstax-search-input"
         className="search-input"
         placeholder="Search something..."
         aria-label="search"
-        // value={inputValue}
         onChange={handleInputChange}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
@@ -47,14 +47,6 @@ export function InputTemplate(
           ))}
         </div>
       )}
-
-      {/* <button
-        className="search-button"
-        id="search-input-action-button"
-        aria-label="search"
-      >
-        <i className="fa fa-search">Submit</i>
-      </button> */}
     </div>
   );
 }

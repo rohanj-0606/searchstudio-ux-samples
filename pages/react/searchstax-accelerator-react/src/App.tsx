@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./App.scss";
 import {
   SearchstaxWrapper,
@@ -29,15 +29,12 @@ function App() {
   const [searchstaxInstance, setSearchstaxInstance] =
     useState<Searchstax | null>(null);
 
-  const [hideThirdRow, setHideThirdRow] = React.useState(true);
-
   function beforeSearch(props) {
     const propsCopy = { ...props };
     return propsCopy;
   }
 
   function afterSearch(results) {
-    setHideThirdRow(false);
     const copy = [...results];
     return copy;
   }
@@ -75,27 +72,21 @@ function App() {
         </div>
 
         {/* Third row: Filter and results */}
-        <div className={!hideThirdRow ? "search-layout-row" : "hide"}>
-          <div className="filter-column">
-            <SearchstaxFacetsWidget
-              facetingType="or"
-              itemsPerPageDesktop={3}
-              itemsPerPageMobile={2}
-              facetsTemplateDesktop={facetsTemplateDesktop}
-              facetsTemplateMobile={facetsTemplateMobile}
-            />
-          </div>
-          <div className="result-column">
-            <SearchstaxResultWidget
-              resultsPerPage={10}
-              renderMethod={"pagination"}
-              resultsTemplate={resultsTemplate}
-              noResultTemplate={noResultTemplate}
-            />
-            <SearchstaxPaginationWidget
-              paginationTemplate={paginationTemplate}
-            />
-          </div>
+        <div className={"search-layout-row"}>
+          <SearchstaxFacetsWidget
+            facetingType="or"
+            itemsPerPageDesktop={3}
+            itemsPerPageMobile={2}
+            facetsTemplateDesktop={facetsTemplateDesktop}
+            facetsTemplateMobile={facetsTemplateMobile}
+          />
+          <SearchstaxResultWidget
+            resultsPerPage={10}
+            renderMethod={"pagination"}
+            resultsTemplate={resultsTemplate}
+            noResultTemplate={noResultTemplate}
+          />
+          <SearchstaxPaginationWidget paginationTemplate={paginationTemplate} />
         </div>
       </div>
     </SearchstaxWrapper>
