@@ -29,19 +29,7 @@ function App() {
   const [searchstaxInstance, setSearchstaxInstance] =
     useState<Searchstax | null>(null);
 
-  const sessionId = generateSessionId(25);
-
-  function generateSessionId(length: number): string {
-    let result = "";
-    const characters =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    for (let i = 0; i < length; i++) {
-      result += characters.charAt(
-        Math.floor(Math.random() * characters.length)
-      );
-    }
-    return result;
-  }
+  const [hideThirdRow, setHideThirdRow] = React.useState(true);
 
   function beforeSearch(props) {
     const propsCopy = { ...props };
@@ -49,6 +37,7 @@ function App() {
   }
 
   function afterSearch(results) {
+    setHideThirdRow(false);
     const copy = [...results];
     return copy;
   }
@@ -86,7 +75,7 @@ function App() {
         </div>
 
         {/* Third row: Filter and results */}
-        <div className="search-layout-row">
+        <div className={!hideThirdRow ? "search-layout-row" : "hide"}>
           <div className="filter-column">
             <SearchstaxFacetsWidget
               facetingType="or"

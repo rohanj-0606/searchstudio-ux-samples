@@ -514,6 +514,10 @@ body {
   box-shadow: 0 2px 4px rgba(231, 111, 81, 0.3);
 }
 
+.hide {
+  display: none;
+}
+
 /* Mobile responsiveness */
 @media (max-width: 768px) {
   .search-layout-row {
