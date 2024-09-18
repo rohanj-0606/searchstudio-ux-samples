@@ -221,6 +221,8 @@ body {
   margin-bottom: 10px;
 }
 
+/* Facets styling */
+
 .searchstax-facets-container-desktop {
   display: flex;
   flex-wrap: nowrap; /* Ensure filters are in one line */
@@ -267,7 +269,6 @@ body {
 .searchstax-facet-values-container {
   display: flex;
   flex-direction: column;
-  aria-live: polite;
   margin-top: 5px;
 }
 
@@ -432,25 +433,21 @@ body {
 }
 
 /* Container for the overall layout */
-.searchstax-page-layout-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 1200px; /* Max width for the entire container */
-  padding: 20px;
-  margin: 0 auto;
-}
-
-/* First row for the search bar */
+/* First row: Search bar centered */
 .search-bar-row {
-  display: flex;
-  justify-content: center;
   width: 100%;
-  margin-bottom: 20px; /* Space between the search bar and the second row */
+  margin-bottom: 90px;
 }
 
-/* Second row layout with filters on the left and results on the right */
+/* Second row: Sorting component */
+.sorting-row {
+  width: 100%;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: flex-end; /* Align sorting widget to the right */
+}
+
+/* Third row: Filters and results layout */
 .search-layout-row {
   display: flex;
   width: 100%;
@@ -475,8 +472,42 @@ body {
   margin-top: 20px;
 }
 
+.searchstax-sorting-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #f4a261;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.searchstax-sorting-label {
+  font-size: 16px;
+  color: #e76f51;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.searchstax-search-order-select {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #f4a261;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.searchstax-search-order-select:focus {
+  border-color: #e76f51;
+  box-shadow: 0 2px 4px rgba(231, 111, 81, 0.3);
+}
+
+/* Mobile responsiveness */
 @media (max-width: 768px) {
-  /* Stack filters and results on top of each other on smaller screens */
   .search-layout-row {
     flex-direction: column;
   }
@@ -490,10 +521,6 @@ body {
   .result-column {
     flex: 0 0 100%;
   }
-}
-
-/* Mobile responsiveness */
-@media (max-width: 768px) {
   .search-input-wrapper {
     width: 90%; /* Adjust the width for mobile */
     padding: 10px; /* Reduce padding on mobile */
