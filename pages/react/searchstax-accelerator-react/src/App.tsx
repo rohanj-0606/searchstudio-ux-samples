@@ -234,6 +234,7 @@ function App() {
               itemsPerPageMobile={2}
               specificFacets={undefined}
               facetsTemplateDesktop={facetsTemplateDesktop}
+              facetsTemplateMobile={facetsTemplateMobile}
             />
           </div>
           <div className="result-column">
