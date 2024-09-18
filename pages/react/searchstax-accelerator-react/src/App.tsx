@@ -215,28 +215,40 @@ function App() {
       initialized={initialized}
     >
       <div className="searchstax-page-layout-container">
-        <SearchstaxInputWidget
-          inputTemplate={InputTemplate}
-          suggestAfterMinChars={renderConfig.inputWidget.suggestAfterMinChars}
-          afterAutosuggest={afterAutosuggest}
-          beforeAutosuggest={beforeAutosuggest}
-        ></SearchstaxInputWidget>
-        <SearchstaxFacetsWidget
-          facetingType="and"
-          itemsPerPageDesktop={4}
-          itemsPerPageMobile={3}
-          specificFacets={undefined}
-          facetsTemplateDesktop={facetsTemplateDesktop}
-          facetsTemplateMobile={facetsTemplateMobile}
-        />
-        <SearchstaxResultWidget
-          afterLinkClick={afterLinkClick}
-          resultsPerPage={10}
-          renderMethod={"pagination"}
-          resultsTemplate={resultsTemplate}
-          noResultTemplate={noResultTemplate}
-        />
-        <SearchstaxPaginationWidget paginationTemplate={paginationTemplate} />
+        {/* First row: Search bar centered */}
+        <div className="search-bar-row">
+          <SearchstaxInputWidget
+            inputTemplate={InputTemplate}
+            suggestAfterMinChars={renderConfig.inputWidget.suggestAfterMinChars}
+            afterAutosuggest={afterAutosuggest}
+            beforeAutosuggest={beforeAutosuggest}
+          />
+        </div>
+
+        {/* Second row: Filter on the left and results on the right */}
+        <div className="search-layout-row">
+          <div className="filter-column">
+            <SearchstaxFacetsWidget
+              facetingType="or"
+              itemsPerPageDesktop={3}
+              itemsPerPageMobile={2}
+              specificFacets={undefined}
+              facetsTemplateDesktop={facetsTemplateDesktop}
+            />
+          </div>
+          <div className="result-column">
+            <SearchstaxResultWidget
+              afterLinkClick={afterLinkClick}
+              resultsPerPage={10}
+              renderMethod={"pagination"}
+              resultsTemplate={resultsTemplate}
+              noResultTemplate={noResultTemplate}
+            />
+            <SearchstaxPaginationWidget
+              paginationTemplate={paginationTemplate}
+            />
+          </div>
+        </div>
       </div>
     </SearchstaxWrapper>
   );

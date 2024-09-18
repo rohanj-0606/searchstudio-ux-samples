@@ -431,6 +431,67 @@ body {
   color: #333;
 }
 
+/* Container for the overall layout */
+.searchstax-page-layout-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px; /* Max width for the entire container */
+  padding: 20px;
+  margin: 0 auto;
+}
+
+/* First row for the search bar */
+.search-bar-row {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 20px; /* Space between the search bar and the second row */
+}
+
+/* Second row layout with filters on the left and results on the right */
+.search-layout-row {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+/* Left column for the filters */
+.filter-column {
+  flex: 0 0 25%; /* Occupies 25% of the width */
+  padding-right: 20px; /* Space between filter and results */
+}
+
+/* Right column for the search results */
+.result-column {
+  flex: 1; /* Occupies the remaining 75% of the width */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Adjustments for pagination and results */
+.searchstax-pagination-container {
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  /* Stack filters and results on top of each other on smaller screens */
+  .search-layout-row {
+    flex-direction: column;
+  }
+
+  .filter-column {
+    flex: 0 0 100%;
+    padding-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .result-column {
+    flex: 0 0 100%;
+  }
+}
+
 /* Mobile responsiveness */
 @media (max-width: 768px) {
   .search-input-wrapper {
