@@ -30,6 +30,7 @@ body {
   width: 50px; /* Default logo size */
   height: auto; /* Maintain aspect ratio */
   margin-right: 10px;
+  cursor: pointer;
 
   /* Responsive size adjustments for mobile */
   @media (max-width: 600px) {
