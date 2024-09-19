@@ -13,7 +13,9 @@ body {
   place-items: center;
   justify-content: center;
   align-items: center;
-  // min-height: 100vh;
+  min-height: 100vh;
+  position: relative;
+
   overflow-x: hidden;
 }
 
@@ -39,12 +41,13 @@ body {
 /* Footer styles */
 .footer {
   background-color: #f8f9fa;
-  padding: 20px;
+  padding: 10px;
   border-top: 1px solid #dee2e6;
   text-align: center;
   width: 100%;
-  position: relative;
+  position: absolute;
   bottom: 0;
+  left: 0;
 }
 
 .footer-content {
@@ -155,6 +158,7 @@ body {
   top: 100%;
   left: 0;
   margin-top: 5px;
+  visibility: visible; /* Ensure it is visible */
 }
 
 /* Hide autosuggest container when there are no suggestions */
@@ -435,6 +439,7 @@ body {
   //grid-row: 2; /* Place pagination in the second row */
   justify-self: right;
   padding-right: 20px;
+  padding-bottom: 40px;
 }
 
 .searchstax-pagination-empty {
@@ -599,17 +604,20 @@ body {
   }
 
   .searchstax-page-layout-container {
-    padding: 60px 0px 0px 0px;
+    padding: 0px;
   }
 
   .search-pagination-row {
-    padding-bottom: 20px;
+    padding-bottom: 60px;
     padding-right: 0px;
     justify-self: center;
   }
 
   .search-bar-row {
     margin-bottom: 0px;
+    position: unset;
+    width: 100%;
+    max-width: 100%;
   }
   .search-layout-row {
     grid-template-columns: 1fr; /* Stacks on small screens */
@@ -625,13 +633,18 @@ body {
   }
 
   .search-input-wrapper {
-    width: 90%; /* Adjust the width for mobile */
-    padding: 10px; /* Reduce padding on mobile */
-    top: 80px; /* Reduce top space for mobile */
+    width: 95%; /* Adjust the width for mobile */
+    position: relative;
+    margin-bottom: 0px;
+    padding: 0px 0px 20px 0px;
+    max-width: 100%;
   }
 
   .autosuggest-container {
-    width: 95%;
+    width: 95%; /* Adjust the width for mobile */
+    left: 50%;
+    transform: translateX(-50%); /* Center the autosuggest on mobile */
+    z-index: 2000; /* Increase the z-index to ensure it's above other elements */
   }
 
   .search-input {
