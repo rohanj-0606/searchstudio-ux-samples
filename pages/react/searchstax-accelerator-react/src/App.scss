@@ -26,6 +26,17 @@ body {
   width: 100%;
 }
 
+.logo {
+  width: 50px; /* Default logo size */
+  height: auto; /* Maintain aspect ratio */
+  margin-right: 10px;
+
+  /* Responsive size adjustments for mobile */
+  @media (max-width: 600px) {
+    width: 30px; /* Smaller logo size on mobile */
+  }
+}
+
 .header-content {
   display: flex;
   align-items: center;

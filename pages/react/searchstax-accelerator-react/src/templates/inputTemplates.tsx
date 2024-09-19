@@ -23,7 +23,7 @@ export function InputTemplate(
         type="text"
         id="searchstax-search-input"
         className="search-input"
-        placeholder="Search something..."
+        placeholder="Search keyword..."
         aria-label="search"
         onChange={handleInputChange}
         onFocus={() => setIsFocused(true)}
