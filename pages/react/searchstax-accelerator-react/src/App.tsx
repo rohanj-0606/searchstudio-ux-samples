@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import "./App.scss";
 import {
   SearchstaxWrapper,
@@ -14,6 +14,8 @@ import {
   noResultTemplate,
   resultsTemplate,
 } from "./templates/resultsTemplates";
+import Header from "./components/Header.js";
+import Footer from "./components/Footer.js";
 
 //@ts-ignore
 import { config, renderConfig } from "../config.js";
@@ -44,52 +46,65 @@ function App() {
   }
 
   return (
-    <SearchstaxWrapper
-      searchURL={config.searchURL}
-      suggesterURL={config.suggesterURL}
-      trackApiKey={config.trackApiKey}
-      searchAuth={config.searchAuth}
-      beforeSearch={beforeSearch}
-      afterSearch={afterSearch}
-      authType={"token"}
-      language={config.language}
-      initialized={initialized}
-    >
-      <div className="searchstax-page-layout-container">
-        {/* First row: Search bar */}
-        <div className="search-bar-row">
-          <SearchstaxInputWidget
-            inputTemplate={InputTemplate}
-            suggestAfterMinChars={renderConfig.inputWidget.suggestAfterMinChars}
-          />
-        </div>
+    <>
+      <Header />
+      <SearchstaxWrapper
+        searchURL={config.searchURL}
+        suggesterURL={config.suggesterURL}
+        trackApiKey={config.trackApiKey}
+        searchAuth={config.searchAuth}
+        beforeSearch={beforeSearch}
+        afterSearch={afterSearch}
+        authType={"token"}
+        language={config.language}
+        initialized={initialized}
+      >
+        <div className="searchstax-page-layout-container">
+          {/* First row: Search bar */}
+          <div className="search-bar-row">
+            <SearchstaxInputWidget
+              inputTemplate={InputTemplate}
+              suggestAfterMinChars={
+                renderConfig.inputWidget.suggestAfterMinChars
+              }
+            />
+          </div>
 
-        {/* Second row: Sorting widget */}
-        <div className="sorting-row">
-          <SearchstaxSortingWidget
-            searchSortingTemplate={searchSortingTemplate}
-          />
-        </div>
+          {/* Second row: Sorting widget */}
+          <div className="sorting-row">
+            <SearchstaxSortingWidget
+              searchSortingTemplate={searchSortingTemplate}
+            />
+          </div>
+          {/* Third row: Filter and results */}
+          <div className="search-layout-row">
+            {/* <div className="filter-column"> */}
+            <SearchstaxFacetsWidget
+              facetingType="or"
+              itemsPerPageDesktop={4}
+              itemsPerPageMobile={3}
+              facetsTemplateDesktop={facetsTemplateDesktop}
+              facetsTemplateMobile={facetsTemplateMobile}
+            />
+            {/* </div> */}
 
-        {/* Third row: Filter and results */}
-        <div className={"search-layout-row"}>
-          <SearchstaxFacetsWidget
-            facetingType="or"
-            itemsPerPageDesktop={3}
-            itemsPerPageMobile={2}
-            facetsTemplateDesktop={facetsTemplateDesktop}
-            facetsTemplateMobile={facetsTemplateMobile}
-          />
-          <SearchstaxResultWidget
-            resultsPerPage={10}
-            renderMethod={"pagination"}
-            resultsTemplate={resultsTemplate}
-            noResultTemplate={noResultTemplate}
-          />
-          <SearchstaxPaginationWidget paginationTemplate={paginationTemplate} />
+            {/* <div className="result-column"> */}
+            <SearchstaxResultWidget
+              resultsPerPage={10}
+              renderMethod={"pagination"}
+              resultsTemplate={resultsTemplate}
+              noResultTemplate={noResultTemplate}
+            />
+          </div>
+          <div className="search-pagination-row">
+            <SearchstaxPaginationWidget
+              paginationTemplate={paginationTemplate}
+            />
+          </div>
         </div>
-      </div>
-    </SearchstaxWrapper>
+      </SearchstaxWrapper>
+      <Footer />
+    </>
   );
 }
 

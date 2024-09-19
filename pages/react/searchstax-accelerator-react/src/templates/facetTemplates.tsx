@@ -81,7 +81,7 @@ export function facetsTemplateDesktop(
                       className="searchstax-facet-value-count"
                       onClick={(e) => selectFacet(refKey, e, facetValue, false)}
                     >
-                      ({facetValue.count})
+                      &nbsp;({facetValue.count})
                     </div>
                   </div>
                 );
